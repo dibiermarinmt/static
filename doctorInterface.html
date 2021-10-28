@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Doctor</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="js/doctorFunctions.js"></script>
+    </head>
+        
+    <body><center>
+        <h2>Registro de Doctores</h2>
+
+        <fieldset style="width: 40%">
+            <legend>Datos de Doctor</legend>
+            <table>
+                <tr>
+                    <th>Name:</th>
+                    <td><input type="text" id="name"></td>
+                </tr>
+                <tr>
+                    <th>Department:</th>
+                    <td><input type="text" id="department"></td>
+                </tr>
+                <tr>
+                    <th>Year:</th>
+                    <td><input type="number" id="year"></td>
+                </tr>
+                <tr>
+                    <th>Description:</th>
+                    <td><input type="text" id="description"></td>
+                </tr>
+                 <tr>
+                    <th>Specialty:</th>
+                    <td><input type="number" id="specialty"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="button" value="GUARDAR" onclick="guardar()"> &nbsp;&nbsp;&nbsp;
+                        <input type="button" value="EDITAR" onclick="editar()"> &nbsp;&nbsp;&nbsp;
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+
+        <h2>Consultas </h2>
+        <hr>
+        
+        <div id="resultados"></div>
+        <button onclick="consultar()">MOSTRAR TODO</button>
+        <br>
+        <br>
+        <a href="index.html">Volver a indice</a>
+    </center></body>
+</html>

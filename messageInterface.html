@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Mensaje</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="js/messageFunctions.js"></script>
+    </head>
+        
+
+    <body onload="consultarDatos()"><center>
+
+        <h2>Registro de Mensajes</h2>
+
+        <fieldset style="width: 40%">
+            <legend>Datos de Mensaje</legend>
+            <table>
+                <tr>
+                    <th>Mensaje:</th>
+                    <td><input type="text" id="messageText"></td>
+                </tr>
+                <tr>
+                    <th>Doctor:</th>
+                    <td><div id="comboDoctor" onclick="fillBookDoctor(document)"></div></td>
+                </tr>
+                <tr>
+                    <th>Client:</th>
+                    <td><div id="comboClient" onclick="fillBookCliente(document)"></div></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="button" value="GUARDAR" onclick="guardar()"> &nbsp;&nbsp;&nbsp;
+                        <input type="button" value="EDITAR" onclick="editar()"> &nbsp;&nbsp;&nbsp;
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+
+        <h2>Consultas </h2>
+        <hr>
+        
+        <div id="resultados"></div>
+        <button onclick="consultar()">MOSTRAR TODO</button>
+        
+        <br>
+        <br>
+        <a href="index.html">Volver a indice</a>
+    </center></body>
+</html>

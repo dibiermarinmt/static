@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+    
+    <head>
+        
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <title>Demo</title>
+        <meta name="description" content=""/>
+        <meta name="viewport" content="width=device-width"/>
+        <base href="/"/>
+        <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+        <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+        
+    </head>
+    <body>
+    <h1>Ciclo 3 Reto 4</h1>
+    <div class="container unauthenticated">
+        Para iniciar sesion con Github:
+        <a href="/oauth2/authorization/github">haz click</a>
+        
+    </div>
+    <div class="container authenticated" style="display:none">
+        Autenticado como: <span id="user"></span>"
+        <h1>INDICE DE SERVICIOS</h1>
+        <ol start="1">
+            <li><a href="specialtyInterface.html">Especialidades</a></li>
+            <li><a href="adminInterface.html">Administradores</a></li>
+            <li><a href="clientInterface.html">Clientes</a></li>
+            <li><a href="doctorInterface.html">Doctores</a></li>
+            <li><a href="messageInterface.html">Mensajes</a></li>
+            <li><a href="reservationInterface.html">Reservaciones</a></li>
+        </ol>
+    </div>
+    </body>
+    
+    <script type="text/javascript">
+    
+    $.get("/user",function(data){
+        
+        $("#user").html(data.name)
+        $(".unauthenticated").hide()
+        $(".authenticated").show()
+        
+    });
+    
+    </script>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Reservaciones</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="js/reservationFunctions.js"></script>
+        
+    </head>
+        
+    <body onload="consultarDatos()"><center>
+        <h2>Registro de Reservaciones</h2>
+
+        <fieldset style="width: 40%">
+            <legend>Datos de Reservaciones</legend>
+            <table>
+                <tr>
+                    <th>Start Date:</th>
+                    <td><input type="number" id="year"></td>
+                    <td>A&ntildeo</td>
+                    <td><input type="number" id="month"></td>
+                    <td>Mes</td>
+                    <td><input type="number" id="day"></td>
+                    <td>Dia</td>
+                </tr>
+                <tr>
+                    <th>Devolution Date:</th>
+                    <td><input type="number" id="yearD"></td>
+                    <td>A&ntildeo</td>
+                    <td><input type="number" id="monthD"></td>
+                    <td>Mes</td>
+                    <td><input type="number" id="dayD"></td>
+                    <td>Dia</td>
+                </tr>
+                <tr>
+                    <th>Status:</th>
+                    <td><input type="text" id="status" readonly="readonly"></td>
+                </tr>
+                <tr>
+                    <th>Doctor:</th>
+                    <td><div id="comboDoctor" onclick="fillBook(document)"></div></td>
+                </tr>
+                <tr>
+                    <th>Client:</th>
+                    <td><div id="comboClient" onclick="fillBookCliente(document)"></div></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="button" value="GUARDAR" onclick="guardar()"> &nbsp;&nbsp;&nbsp;
+                        <input type="button" value="EDITAR" onclick="editar()"> &nbsp;&nbsp;&nbsp;
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+
+        <h2>Consultas </h2>
+        <hr>
+        
+        <div id="resultados"></div>
+        <button onclick="consultar()">MOSTRAR TODO</button>
+        
+        <br>
+        <br>
+        <a href="index.html">Volver a indice</a>
+
+        <h2>Registro de Calificaciones</h2>
+
+        <fieldset style="width: 40%">
+            <legend>Datos de Calificaciones</legend>
+            <table>
+                <tr>
+                    <th>Score</th>
+                    <td><input type="number" id="score" readonly="readonly"></td>
+                </tr>
+                <tr>    
+                    <td>Mensaje</td>
+                    <td><input type="text" id="message" readonly="readonly"></td>
+                </tr>
+                
+                    <td colspan="2">
+                        <input type="button" value="GUARDAR CALIFICACION" onclick="calificacion()"> &nbsp;&nbsp;&nbsp;
+                        <input type="button" value="EDITAR CALIFICACION" onclick="editarScore()"> &nbsp;&nbsp;&nbsp;
+                
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+
+        
+            
+        
+            
+            
+            
+
+        
+        
+        
+        
+    </center></body>
+</html>
