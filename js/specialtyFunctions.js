@@ -17,7 +17,7 @@ function editar(){
        
         data: dataToSend,
         
-        url: 'http://129.151.116.109:8080/api/Specialty/update',
+        url: 'http://129.151.116.109:9090/api/Specialty/update',
         
         type: 'PUT',
         contentType:'application/json',
@@ -52,7 +52,7 @@ function eliminar(idElemento){
         data : dataToSend,
         
        
-        url : "http://129.151.116.109:8080/api/Specialty/"+idElemento,
+        url : "http://129.151.116.109:9090/api/Specialty/"+idElemento,
         type: 'DELETE',
         contentType:'application/json',
         success : function(json, textStatus, xhr) {
@@ -110,7 +110,7 @@ function eliminar(idElemento){
 
 function cargar(idItem){
     $.ajax({    
-        url : "http://129.151.116.109:8080/api/Specialty/"+idItem,
+        url : "http://129.151.116.109:9090/api/Specialty/"+idItem,
         type : 'GET',
         dataType : 'json',        
         
@@ -132,7 +132,7 @@ function cargar(idItem){
 
 function consultar(){
     $.ajax({
-        url:"http://129.151.116.109:8080/api/Specialty/all",
+        url:"http://129.151.116.109:9090/api/Specialty/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
@@ -141,7 +141,7 @@ function consultar(){
         }
     });
 }
-consultar();
+//consultar();
 
 function pintarRespuesta(respuesta){
     let myTable="<table border='1'>";
@@ -173,7 +173,7 @@ function guardar(){
         contentType:"application/json; charset=utf-8",
         dataType: 'JSON',
         data: JSON.stringify(var2),
-        url:"http://129.151.116.109:8080/api/Specialty/save",
+        url:"http://129.151.116.109:9090/api/Specialty/save",
         success:function(respose) {
             console.log("Se guardó correctamente");
             //alert("Se guardó correctametne..");
@@ -182,7 +182,7 @@ function guardar(){
             consultar();
         },
         error:function(jqXHR, textStatus, errorTrown){
-            window.location.reload();
+            //window.location.reload();
             console.log("No se guardó");
             alert("No se guardó correctamente");
         }

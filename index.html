@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="es">
-    
+
     <head>
-        
+
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <title>Demo</title>
@@ -12,38 +12,204 @@
         <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
         <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
         <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script>
+            function cargarPag() {
+                $("#contSpecialty").load("http://localhost:9090/specialtyInterface.html", function (data) {
+
+                    $(this).html(data);
+                    $("#contSpecialty").width= 100;
+                })
+            }
+            
+            function mostrarPag(){
+                cargarPag()
+                console.log("se esta ejecutando mostrar pag")
+                var cardSpecialty = document.getElementById("cardSpecialty");
+                var tama = false
+                if (cardSpecialty.style.width=="25rem"){
+                    
+                    tama = true;
+                    
+                }
+                
+                if (tama==true){
+                    
+                    cardSpecialty.style.width="110rem";
+                    
+                }
+                if(tama==false){
+                    
+                    cardSpecialty.style.width="25rem";
+                }
+                
+    }
+        </script>
     </head>
-    <body>
-    <h1>Ciclo 3 Reto 4</h1>
-    <div class="container unauthenticated">
-        Para iniciar sesion con Github:
-        <a href="/oauth2/authorization/github">haz click</a>
+    <body> 
         
-    </div>
-    <div class="container authenticated" style="display:none">
-        Autenticado como: <span id="user"></span>"
-        <h1>INDICE DE SERVICIOS</h1>
-        <ol start="1">
-            <li><a href="specialtyInterface.html">Especialidades</a></li>
-            <li><a href="adminInterface.html">Administradores</a></li>
-            <li><a href="clientInterface.html">Clientes</a></li>
-            <li><a href="doctorInterface.html">Doctores</a></li>
-            <li><a href="messageInterface.html">Mensajes</a></li>
-            <li><a href="reservationInterface.html">Reservaciones</a></li>
-        </ol>
-    </div>
+        <div class ="container">
+
+        <h1>Ciclo 3 Reto 4</h1>
+        
+        </div>
+        <div class="container unauthenticated">
+            Para iniciar sesion con Github:
+            <a href="/oauth2/authorization/github">haz click</a>
+
+        </div>
+        <div class="container authenticated" style="display:none" id="popo">
+            
+            
+        <div class ="container">
+
+            Autenticado como: <span id="user"></span>"
+            <h1>SERVICIOS</h1>
+        </div>
+        
+            
+            <div class ="container"><div class="row" id="indice">
+
+
+                    <div class="card m-2" style="width: 25rem;" id="cardSpecialty">
+                        <div class="card-body">
+
+                            <h5 class="card-tittle">
+                                Especialidad
+                            </h5>
+                            <h6 class="card-subtittle">
+                                Subtitulo
+                            </h6>
+
+                            <p>Creacion, edicion y muestra de Especialidades</p>
+                            <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#demo" onclick="mostrarPag()">Menu Especialidad</button>
+                            
+                        <div class="container" id="contSpecialty2">
+
+                        <div id="demo" class="collapse" >
+                            
+                            <div class="container" id="contSpecialty" style=width:80rem>
+            
+                            </div>
+
+                        </div>
+                    </div>
+                      </div>
+                    </div>
+
+
+                    &nbsp&nbsp&nbsp
+
+                    <div class="card m-2" style="width: 25rem;">
+                        <div class="card-body">
+
+                            <h5 class="card-tittle">
+                                Administrador
+                            </h5>
+                            <h6 class="card-subtittle">
+                                Subtitulo
+                            </h6>
+
+                            <p>Creacion, edicion y muestra de Administradores</p>
+                            <a href="adminInterface.html">Link 1</a>
+                            <a href="#">Link 2</a>
+                        </div>
+                    </div>
+                    &nbsp&nbsp&nbsp
+                    <div class="card m-2" style="width: 25rem;">
+                        <div class="card-body">
+
+                            <h5 class="card-tittle">
+                                Cliente
+                            </h5>
+                            <h6 class="card-subtittle">
+                                Subtitulo
+                            </h6>
+
+                            <p>Creacion, edicion y muestra de Clientes</p>
+                            <a href="clientInterface.html">Link 1</a>
+                            <a href="#">Link 2</a>
+                        </div>
+                    </div>
+
+                    &nbsp&nbsp&nbsp 
+                    <div class="card m-2" style="width: 25rem;">
+                        <div class="card-body">
+
+                            <h5 class="card-tittle">
+                                Doctor
+                            </h5>
+                            <h6 class="card-subtittle">
+                                Subtitulo
+                            </h6>
+
+                            <p>Creacion, edicion y muestra de Doctores</p>
+                            <a href="doctorInterface.html">Link 1</a>
+                            <a href="#">Link 2</a>
+                        </div>
+
+                    </div>
+
+                    &nbsp&nbsp&nbsp
+                    <div class="card m-2" style="width: 25rem;">
+                        <div class="card-body">
+
+                            <h5 class="card-tittle">
+                                Mensaje
+                            </h5>
+                            <h6 class="card-subtittle">
+                                Subtitulo
+                            </h6>
+
+                            <p>Creacion, edicion y muestra de Mensajes</p>
+                            <a href="messageInterface.html">Link 1</a>
+                            <a href="#">Link 2</a>
+                        </div>
+                    </div>
+
+                    &nbsp&nbsp&nbsp
+                    <div class="card m-2" style="width: 25rem;">
+                        <div class="card-body">
+
+                            <h5 class="card-tittle">
+                                Reservacion
+                            </h5>
+                            <h6 class="card-subtittle">
+                                Subtitulo
+                            </h6>
+
+                            <p>Creacion, edicion, muestra de Reservaciones y Calificaciones</p>
+                            <a href="reservationInterface.html">Link 1</a>
+                            <a href="#">Link 2</a>
+                            <button type="button" class="btn btn-outline-danger" value="poronga">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                                    <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506"></path>
+                                    </svg>
+                                Poronga
+                            </button>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            
     </body>
-    
+
     <script type="text/javascript">
-    
-    $.get("/user",function(data){
-        
-        $("#user").html(data.name)
-        $(".unauthenticated").hide()
-        $(".authenticated").show()
-        
-    });
-    
+
+        $.get("/user", function (data) {
+
+            $("#user").html(data.name)
+            $(".unauthenticated").hide()
+            $(".authenticated").show()
+
+        });
+
     </script>
 </html>
