@@ -2,15 +2,15 @@ var idCarga; // Guarda el Id del elemento cuando se da click en el botón cargar
 
 
 
-function editar(){
+function editarDoctor(){
 
     var elemento={
         "id":idCarga,
-        "name":$("#name").val(),
-        "department":$("#department").val(),
-        "year":$("#year").val(),
-        "description":$("#description").val(),
-        "specialty":{"id":$("#specialty").val()}
+        "name":$("#nameDoctor").val(),
+        "department":$("#departmentDoctor").val(),
+        "year":$("#yearDoctor").val(),
+        "description":$("#descriptionDoctor").val(),
+        "specialty":{"id":$("#specialtyDoctor").val()}
     };
     
     var dataToSend=JSON.stringify(elemento);
@@ -34,14 +34,14 @@ function editar(){
         
         complete : function(xhr, status) {
             //alert('Petición realizada '+xhr.status);
-            limpiarFormulario();
-            consultar();
+            limpiarFormularioDoctor();
+            consultarDoctor();
             idCarga=null;
         }
     });
 }
 
-function eliminar(idElemento){
+function eliminarDoctor(idElemento){
     var elemento={
         "id":idElemento
       };
@@ -67,7 +67,7 @@ function eliminar(idElemento){
         complete : function(xhr, status) {
            //lert('Petición realizada '+xhr.status);
             //limpiarFormulario();
-            consultar();
+            consultarDoctor();
         }
     });
 }
@@ -75,7 +75,7 @@ function eliminar(idElemento){
 
 
 
-function cargar(idItem){
+function cargarDoctor(idItem){
     $.ajax({    
         url : "http://129.151.116.109:8080/api/Doctor/"+idItem,
         type : 'GET',
@@ -84,11 +84,11 @@ function cargar(idItem){
         success : function(json) {               
                 console.log(json);
   
-          $("#name").val(json.name);
-          $("#department").val(json.department);
-          $("#year").val(json.year);
-          $("#description").val(json.description);
-          $("#specialty").val(json.specialty.id);
+          $("#nameDoctor").val(json.name);
+          $("#departmentDoctor").val(json.department);
+          $("#yearDoctor").val(json.year);
+          $("#descriptionDoctor").val(json.description);
+          $("#specialtyDoctor").val(json.specialty.id);
           idCarga = idItem;
           console.log("idCarga es " +idCarga);
         }
@@ -98,19 +98,19 @@ function cargar(idItem){
 //////------------------
 
 
-function consultar(){
+function consultarDoctor(){
     $.ajax({
         url:"http://129.151.116.109:8080/api/Doctor/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
             console.log(respuesta);
-            pintarRespuesta(respuesta);
+            pintarRespuestaDoctor(respuesta);
         }
     });
 }
 
-function pintarRespuesta(respuesta){
+function pintarRespuestaDoctor(respuesta){
    
     let myTable="<table border=1>";
 
@@ -139,13 +139,13 @@ function pintarRespuesta(respuesta){
     $("#resultados").html(myTable);
 }
 
-function guardar(){
+function guardarDoctor(){
     let var2 = {
-        name:$("#name").val(),
-        department:$("#department").val(),
-        year:$("#year").val(),
-        description:$("#description").val(),
-        specialty:{"id":$("#specialty").val()}
+        name:$("#nameDoctor").val(),
+        department:$("#departmentDoctor").val(),
+        year:$("#yearDoctor").val(),
+        description:$("#descriptionDoctor").val(),
+        specialty:{"id":$("#specialtyDoctor").val()}
     };
     $.ajax({
         type:'POST',
@@ -157,8 +157,8 @@ function guardar(){
             console.log("Se guardó correctamente");
             //alert("Se guardó correctametne..");
             //window.location.reload();
-            limpiarFormulario();
-            consultar();
+            limpiarFormularioDoctor();
+            consultarDoctor();
         },
         error:function(jqXHR, textStatus, errorTrown){
             window.location.reload();
@@ -168,10 +168,13 @@ function guardar(){
     });
 }
 
-function limpiarFormulario(){
-    $("#name").val("");
-    $("#department").val("");
-    $("#year").val("");
-    $("#description").val("");
-    $("#specialty").val("");
+function limpiarFormularioDoctor(){
+    $("#nameDoctor").val("");
+    $("#departmentDoctor").val("");
+    $("#yearDoctor").val("");
+    $("#descriptionDoctor").val("");
+    $("#specialtyDoctor").val("");
 }
+$(document).ready(function(){
+    consultarDoctor();
+});

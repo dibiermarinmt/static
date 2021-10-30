@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous"-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <!--script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script-->
@@ -12,12 +13,12 @@
         
     <body><center>
         <h2 class="text-md-center m-4">Registro de Administradores</h2>
-        <div id="formato" class="container text-center" style="width: 60rem">
-            <input class="form-control m-3" type="text" id="name" placeholder="Nombre">
-            <input class="form-control m-3" type="text" id="email" placeholder="E-mail">
-            <input class="form-control m-3" type="text" id="password" placeholder="Password">
-            <button type="button" class="btn btn-success" onclick="guardar()">GUARDAR</button>
-            <button type="button" class="btn btn-success" onclick="editar()">EDITAR</button>
+        <div id="formato" class="container text-center" style="width: 80%;">
+            <input class="form-control m-3" type="text" id="nameAdmin" placeholder="Nombre">
+            <input class="form-control m-3" type="text" id="emailAdmin" placeholder="E-mail">
+            <input class="form-control m-3" type="text" id="passwordAdmin" placeholder="Password">
+            <button type="button" class="btn btn-success" onclick="guardarAdmin()">GUARDAR</button>
+            <button type="button" class="btn btn-success" onclick="editarAdmin()">EDITAR</button>
         </div>
         
 
@@ -50,6 +51,6 @@
         <hr>
         <h2 class="text-md-center m-4">Consultas </h2>
        
-        <div id="resultados"></div>
+        <div id="resultadosAdmin" class="container" style="width: 120%;"></div>
     </center></body>
 </html>
