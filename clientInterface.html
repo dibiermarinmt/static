@@ -2,13 +2,30 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Cliente</title>
+        <!--title>Cliente</title-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="js/clientFunctions.js"></script>
     </head>
         
     <body><center>
-        <h2>Registro de Clientes</h2>
+        <h2 class="text-md-center m-4">Registro de Clientes</h2>
+        <div id="formato" class="container text-center" style="width: 60%">
+            <input class="form-control m-3" type="text" id="name" placeholder="Nombre">
+            <input class="form-control m-3" type="text" id="email" placeholder="E-mail">
+            <input class="form-control m-3" type="number" id="age" placeholder="Edad">
+            <input class="form-control m-3" type="text" id="password" placeholder="Password">
+            <button type="button" class="btn btn-success" onclick="guardarCliente()">GUARDAR</button>
+            <button type="button" class="btn btn-success" onclick="editarCliente()">EDITAR</button>
+        </div>
+        
+        <hr>
+        <h2 class="text-md-center m-4">Consultas </h2>
+       
+        <div id="resultados"></div>
+        
+        
+        
+        <!--h2 class="text-md-center m-4">Registro de Clientes</h2>
 
         <fieldset style="width: 40%">
             <legend>Datos de Cliente</legend>
@@ -45,6 +62,6 @@
         <button onclick="consultar()">MOSTRAR TODO</button>
         <br>
         <br>
-        <a href="index.html">Volver a indice</a>
+        <a href="index.html">Volver a indice</a -->
     </center></body>
 </html>
