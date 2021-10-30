@@ -13,12 +13,12 @@
         
     <body><center>
         <h2 class="text-md-center m-4">Registro de Administradores</h2>
-        <div id="formato">
-            <input type="text" id="name" placeholder="Nombre">
-            <input type="text" id="email" placeholder="E-mail">
-            <input type="text" id="password" placeholder="Password">
-            <input type="button" value="GUARDAR" onclick="guardar()">
-            <input type="button" value="EDITAR" onclick="editar()">
+        <div id="formato" class="form-group container text-center">
+            <input class="form-control m-3" type="text" id="name" placeholder="Nombre">
+            <input class="form-control m-3" type="text" id="email" placeholder="E-mail">
+            <input class="form-control m-3" type="text" id="password" placeholder="Password">
+            <button type="button" class="btn btn-success" onclick="guardar()">GUARDAR</button>
+            <button type="button" class="btn btn-success" onclick="editar()">EDITAR</button>
         </div>
         
 
@@ -47,12 +47,11 @@
             </table>
         </fieldset-->
 
-        <h2>Consultas </h2>
-        <hr>
         
+        <hr>
+        <h2 class="text-md-center m-4">Consultas </h2>
        
         <div id="resultados"></div>
-        <button onclick="consultar()">MOSTRAR TODO</button>
         <br>
         <br>
         <a href="index.html">Volver a indice</a>
