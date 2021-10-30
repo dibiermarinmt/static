@@ -2,7 +2,7 @@ var idCarga; // Guarda el Id del elemento cuando se da click en el botón cargar
 
 
 
-function editar(){
+function editarAdmin(){
 
     var elemento={
         "idAdmin":idCarga,
@@ -32,14 +32,14 @@ function editar(){
         
         complete : function(xhr, status) {
             //alert('Petición realizada '+xhr.status);
-            limpiarFormulario();
-            consultar();
+            //limpiarFormularioAdmin();
+            consultarAdmin();
             idCarga=null;
         }
     });
 }
 
-function eliminar(idElemento){
+function eliminarAdmin(idElemento){
     var elemento={
         "idAdmin":idElemento
       };
@@ -65,13 +65,13 @@ function eliminar(idElemento){
         complete : function(xhr, status) {
            //lert('Petición realizada '+xhr.status);
             //limpiarFormulario();
-            consultar();
+            consultarAdmin();
         }
     });
 }
 
 
-function cargar(idItem){
+function cargarAdmin(idItem){
     $.ajax({    
         url : "http://localhost:8080/api/Admin/"+idItem,
         type : 'GET',
@@ -97,20 +97,20 @@ function cargar(idItem){
 //////------------------
 
 
-function consultar(){
+function consultarAdmin(){
     $.ajax({
         url:"http://localhost:8080/api/Admin/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
             console.log(respuesta);
-            pintarRespuesta(respuesta);
+            pintarRespuestaAdmin(respuesta);
         }
     });
 }
 
-function pintarRespuesta(respuesta){
-    let myTable=`<div class="container"><div class="row">`;
+function pintarRespuestaAdmin(respuesta){
+    let myTable=`<div class="container" style="width: 100%"><div class="row">`;
     for(i=0; i<respuesta.length; i++) {
         myTable+=`
             <div class="card m-2" style="width: 20rem;">
@@ -119,8 +119,8 @@ function pintarRespuesta(respuesta){
                     <a href="${respuesta[i].email}" class="card-link">${respuesta[i].email}</a>
                     <!-- p class="card-text">${respuesta[i].password}</p -->
                     <div align="centre">
-                        <button class="btn btn-success" onclick="eliminar(${respuesta[i].idAdmin})">Borrar</button>
-                        <button class="btn btn-success" onclick="cargar(${respuesta[i].idAdmin})">Cargar</button>
+                        <button class="btn btn-success" onclick="eliminarAdmin(${respuesta[i].idAdmin})">Borrar</button>
+                        <button class="btn btn-success" onclick="cargarAdmin(${respuesta[i].idAdmin})">Cargar</button>
                     </div>
                 </div>
             </div>`;   
@@ -151,7 +151,7 @@ function pintarRespuesta(respuesta){
     $("#resultados").html(myTable);**/
 }
 
-function guardar(){
+function guardarAdmin(){
     let var2 = {
         name:$("#name").val(),
         email:$("#email").val(),
@@ -167,8 +167,8 @@ function guardar(){
             console.log("Se guardó correctamente");
             //alert("Se guardó correctametne..");
             //window.location.reload();
-            limpiarFormulario();
-            consultar();
+            //limpiarFormularioAdmin();
+            consultarAdmin();
         },
         error:function(jqXHR, textStatus, errorTrown){
             
@@ -178,12 +178,12 @@ function guardar(){
     });
 }
 
-function limpiarFormulario(){
+function limpiarFormularioAdmin(){
     $("#name").val("");
     $("#email").val("");
     $("#password").val("");
 }
 
 $(document).ready(function(){
-    consultar();
+    consultarAdmin();
 });
