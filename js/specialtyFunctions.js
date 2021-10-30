@@ -69,44 +69,6 @@ function eliminar(idElemento){
     });
 }
 
-/*function buscarPorID(idItem){
-
-    var id = idItem; 
-    $.ajax({    
-        url : 'https://ga9c9b6eca3f530-db202109271959.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/doctor/doctor/'+id.val(),
-        type : 'GET',
-        dataType : 'json',        
-
-        success : function(json) {
-                $("#resultados").empty();
-               
-                console.log(json.items[0].id +" $"+json.items[0].name);
-                console.log("no se puedo ");
-
-                var misItems=json.items;
-                    
-                
-                 
-                  $("#resultados").append("<tr>");
-                  $("#resultados").append("<td>"+misItems[0].id+" || "+ "</td>");
-                  $("#resultados").append("<td>"+misItems[0].specialty+" || "+"</td>");
-                  $("#resultados").append("<td>"+misItems[0].graduate_year+" || "+"</td>");
-                  $("#resultados").append("<td>"+misItems[0].department_id+" || "+"</td>");
-                  $("#resultados").append("<td>"+misItems[0].name+" || "+"</td>");
-                  $("#resultados").append('<td><button onclick="eliminar('+misItems[0].id+')">Borrar</button></td>');
-                  $("#resultados").append('<td><button onclick="obtenerItemEspecifico('+misItems[0].id+')">Cargar</button></td>');
-                  $("#resultados").append("</tr>");
-        
-                
-
-        },
-        
-        complete : function(xhr, status) {
-            alert('Petición realizada '+xhr.status);
-        }
-    });
-}*/ // No se necesita
-
 
 function cargar(idItem){
     $.ajax({    
