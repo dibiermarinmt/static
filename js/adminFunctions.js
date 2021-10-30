@@ -110,7 +110,7 @@ function consultar(){
 }
 
 function pintarRespuesta(respuesta){
-    let myTable=`<div class="container" align="centre"><div class="row">`;
+    let myTable=`<div class="container"><div class="row">`;
     for(i=0; i<respuesta.length; i++) {
         myTable+=`
             <div class="card m-2" style="width: 20rem;">

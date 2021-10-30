@@ -2,7 +2,7 @@
 //Funciones Cargar pagina Specialidad
 
 function cargarPag() {
-    $("#contSpecialty").load("http://localhost:9090/specialtyInterface.html", function (data) {
+    $("#contSpecialty").load("http://localhost:8080/specialtyInterface.html", function (data) {
 
         $(this).html(data);
         $("#contSpecialty").width= 100;
@@ -37,7 +37,7 @@ function mostrarPagSpec(){
 //Funciones Cargar pagina Administradores
 
 function cargarPagAdmin() {
-    $("#contAdmin").load("http://localhost:9090/adminInterface.html", function (data) {
+    $("#contAdmin").load("http://localhost:8080/adminInterface.html", function (data) {
     console.log("se esta ejecutando cargarPagAdmin")
         $(this).html(data);
         $("#contAdmin").width= 100;
@@ -48,7 +48,7 @@ function mostrarPagAdmin(){
     cargarPagAdmin()
     console.log("se esta ejecutando mostrar pag")
     var cardAdmin = document.getElementById("cardAdmin");
-    var tamaAdmin = false
+    var tamaAdmin = false;
     if (cardAdmin.style.width=="25rem"){
         
         tamaAdmin = true;
@@ -72,7 +72,7 @@ function mostrarPagAdmin(){
 //Funciones Cargar pagina Clientes
 
 function cargarPagClient() {
-    $("#contClient").load("http://localhost:9090/clientInterface.html", function (data) {
+    $("#contClient").load("http://localhost:8080/clientInterface.html", function (data) {
     console.log("se esta ejecutando cargarPagClient")
         $(this).html(data);
         $("#contAdmin").width= 100;
@@ -106,7 +106,7 @@ function mostrarPagClient(){
 //Funciones Cargar pagina Doctor
 
 function cargarPagDoctor() {
-    $("#contDoctor").load("http://localhost:9090/DoctorInterface.html", function (data) {
+    $("#contDoctor").load("http://localhost:8080/DoctorInterface.html", function (data) {
     console.log("se esta ejecutando cargarPagDoctor")
         $(this).html(data);
         $("#contDoctor").width= 100;
@@ -140,7 +140,7 @@ function mostrarPagDoctor(){
 //Funciones Cargar pagina Mensaje
 
 function cargarPagMessage() {
-    $("#contMessage").load("http://localhost:9090/messageInterface.html", function (data) {
+    $("#contMessage").load("http://localhost:8080/messageInterface.html", function (data) {
     console.log("se esta ejecutando cargarPagMessage")
         $(this).html(data);
         $("#contMessage").width= 100;
@@ -171,7 +171,7 @@ function mostrarPagMessage(){
 }
 
 function cargarPagReservation() {
-    $("#contReservation").load("http://localhost:9090/reservationInterface.html", function (data) {
+    $("#contReservation").load("http://localhost:8080/reservationInterface.html", function (data) {
     console.log("se esta ejecutando cargarPagMessage")
         $(this).html(data);
         $("#contReservation").width= 100;
