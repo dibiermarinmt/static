@@ -118,8 +118,10 @@ function pintarRespuesta(respuesta){
                     <h5 class="card-title">${respuesta[i].name}</h5>
                     <a href="${respuesta[i].email}" class="card-link">${respuesta[i].email}</a>
                     <!-- p class="card-text">${respuesta[i].password}</p -->
-                    <button class="btn btn-danger" onclick="eliminar(${respuesta[i].idAdmin})">Borrar</button>
-                    <button class="btn btn-danger" onclick="cargar(${respuesta[i].idAdmin})">Cargar</button>
+                    <div align="centre">
+                        <button class="btn btn-danger" onclick="eliminar(${respuesta[i].idAdmin})">Borrar</button>
+                        <button class="btn btn-danger" onclick="cargar(${respuesta[i].idAdmin})">Cargar</button>
+                    </div>
                 </div>
             </div>`;   
          
