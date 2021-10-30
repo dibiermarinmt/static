@@ -1,7 +1,6 @@
 var idCarga; // Guarda el Id del elemento cuando se da click en el botón cargar
 
 
-
 function editar(){
 
     var elemento={
@@ -17,7 +16,7 @@ function editar(){
        
         data: dataToSend,
         
-        url: 'http://129.151.116.109:9090/api/Specialty/update',
+        url: 'http://localhost:1010/api/Specialty/update',
         
         type: 'PUT',
         contentType:'application/json',
@@ -52,7 +51,7 @@ function eliminar(idElemento){
         data : dataToSend,
         
        
-        url : "http://129.151.116.109:9090/api/Specialty/"+idElemento,
+        url : "http://localhost:1010/api/Specialty/"+idElemento,
         type: 'DELETE',
         contentType:'application/json',
         success : function(json, textStatus, xhr) {
@@ -69,10 +68,9 @@ function eliminar(idElemento){
     });
 }
 
-
 function cargar(idItem){
     $.ajax({    
-        url : "http://129.151.116.109:9090/api/Specialty/"+idItem,
+        url : "http://localhost:1010/api/Specialty/"+idItem,
         type : 'GET',
         dataType : 'json',        
         
@@ -91,10 +89,9 @@ function cargar(idItem){
 
 //////------------------
 
-
 function consultar(){
     $.ajax({
-        url:"http://129.151.116.109:9090/api/Specialty/all",
+        url:"http://localhost:1010/api/Specialty/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
@@ -106,22 +103,30 @@ function consultar(){
 //consultar();
 
 function pintarRespuesta(respuesta){
-    let myTable="<table border='1'>";
-    myTable+="<thead>";
-    myTable+="<TR>";
-    myTable+="<th>"+"Nombre"+"</th>";
-    myTable+="<th>"+"Descripcion"+"</th>";
-    myTable+="</TR>";
-    myTable+="</thead>";
+
+    
+    
+    
+    
+    
+    
+    
+    let myTable=`<div class="container" style="width: 100%;"><div class="row" >`;
     for(i=0; i<respuesta.length; i++) {
-        myTable+="<tr>";
-        myTable+="<td>"+respuesta[i].name+"</td>";
-        myTable+="<td>"+respuesta[i].description+"</td>";
-        myTable+="<td><button onclick='eliminar("+respuesta[i].id+")'>Borrar</button></td>";
-        myTable+="<td><button onclick='cargar("+respuesta[i].id+")'>Cargar</button></td>";
-        myTable+="</tr>";
+        myTable+=`
+            <div class="card m-2" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">${respuesta[i].name}</h5>
+                    <p>${respuesta[i].description}</p>
+                    <div align="centre">
+                        <button class="btn btn-success" onclick="eliminar(${respuesta[i].id})">Borrar</button>
+                        <button class="btn btn-success" onclick="cargar(${respuesta[i].id})">Cargar</button>
+                    </div>
+                </div>
+            </div>`;   
+         
     }
-    myTable+="</table>";
+    myTable+=`</div></div>`;
     $("#resultados").html(myTable);
 }
 
@@ -135,7 +140,7 @@ function guardar(){
         contentType:"application/json; charset=utf-8",
         dataType: 'JSON',
         data: JSON.stringify(var2),
-        url:"http://129.151.116.109:9090/api/Specialty/save",
+        url:"http://localhost:1010/api/Specialty/save",
         success:function(respose) {
             console.log("Se guardó correctamente");
             //alert("Se guardó correctametne..");
@@ -154,4 +159,10 @@ function guardar(){
 function limpiarFormulario(){
     $("#name").val("");
     $("#description").val("");
+    
 }
+
+$(document).ready(function(){
+    consultar();
+});
+

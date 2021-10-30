@@ -10,41 +10,17 @@
     <body><center>
         <h2>Registro de Clientes</h2>
 
-        <fieldset style="width: 40%">
-            <legend>Datos de Cliente</legend>
-            <table>
-                <tr>
-                    <th>Name:</th>
-                    <td><input type="text" id="name"></td>
-                </tr>
-                <tr>
-                    <th>Email:</th>
-                    <td><input type="text" id="email"></td>
-                </tr>
-                <tr>
-                    <th>Age:</th>
-                    <td><input type="number" id="age"></td>
-                </tr>
-                <tr>
-                    <th>Password:</th>
-                    <td><input type="text" id="password"></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <input type="button" value="GUARDAR" onclick="guardar()"> &nbsp;&nbsp;&nbsp;
-                        <input type="button" value="EDITAR" onclick="editar()"> &nbsp;&nbsp;&nbsp;
-                    </td>
-                </tr>
-            </table>
-        </fieldset>
 
-        <h2>Consultas </h2>
-        <hr>
-        
-        <div id="resultados"></div>
-        <button onclick="consultar()">MOSTRAR TODO</button>
-        <br>
-        <br>
-        <a href="index.html">Volver a indice</a>
+        <div id="formato" class="container text-center" style="width: 80%;">
+            <input class="form-control m-3" type="text" id="nameClient" placeholder="Nombre">
+            <input class="form-control m-3" type="text" id="emailClient" placeholder="E-mail">
+            <input class="form-control m-3" type="text" id="passwordClient" placeholder="Password">
+            <button type="button" class="btn btn-success" onclick="guardarClient()">GUARDAR</button>
+            <button type="button" class="btn btn-success" onclick="editarClient()">EDITAR</button>
+        </div>
+        <h2 class="text-md-center m-4">Consultas </h2>
+       
+        <div id="resultadosClient" style="width: 120%;"></div>
+
     </center></body>
 </html>

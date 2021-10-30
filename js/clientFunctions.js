@@ -1,15 +1,14 @@
 var idCarga; // Guarda el Id del elemento cuando se da click en el botón cargar
 
 
-
-function editar(){
+function editarClient(){
 
     var elemento={
         idClient:idCarga,
-        name:$("#name").val(),
-        email:$("#email").val(),
-        age:$("#age").val(),
-        password:$("#password").val()
+        name:$("#nameClient").val(),
+        email:$("#emailClient").val(),
+        age:$("#ageClient").val(),
+        password:$("#passwordClient").val()
           
     };
     
@@ -22,7 +21,7 @@ function editar(){
        
         data: dataToSend,
         
-        url: 'http://129.151.116.109:8080/api/Client/update',
+        url: 'http://localhost:1010/api/Client/update',
         
         type: 'PUT',
         contentType:'application/json',
@@ -36,14 +35,14 @@ function editar(){
         
         complete : function(xhr, status) {
             //alert('Petición realizada '+xhr.status);
-            limpiarFormulario();
-            consultar();
+            limpiarFormularioClient();
+            consultarClient();
             idCarga=null;
         }
     });
 }
 
-function eliminar(idElemento){
+function eliminarClient(idElemento){
     var elemento={
         "idClient":idElemento
       };
@@ -57,7 +56,7 @@ function eliminar(idElemento){
         data : dataToSend,
         
        
-        url : "http://129.151.116.109:8080/api/Client/"+idElemento,
+        url : "http://localhost:1010/api/Client/"+idElemento,
         type: 'DELETE',
         contentType:'application/json',
         success : function(json, textStatus, xhr) {
@@ -69,7 +68,7 @@ function eliminar(idElemento){
         complete : function(xhr, status) {
            //lert('Petición realizada '+xhr.status);
             //limpiarFormulario();
-            consultar();
+            consultarClient();
         }
     });
 }
@@ -77,10 +76,9 @@ function eliminar(idElemento){
 
 
 
-
-function cargar(idItem){
+function cargarClient(idItem){
     $.ajax({    
-        url : "http://129.151.116.109:8080/api/Client/"+idItem,
+        url : "http://localhost:1010/api/Client/"+idItem,
         type : 'GET',
         dataType : 'JSON',        
 
@@ -89,10 +87,10 @@ function cargar(idItem){
 
                 var misItems=json.items;
   
-          $("#name").val(json.name);
-          $("#email").val(json.email);
-          $("#age").val(json.age);
-          $("#password").val(json.password);
+          $("#nameClient").val(json.name);
+          $("#emailClient").val(json.email);
+          $("#ageClient").val(json.age);
+          $("#passwordClient").val(json.password);
           idCarga = idItem;
           console.log("idCarga es " +idCarga);
   
@@ -103,61 +101,59 @@ function cargar(idItem){
 
 //////------------------
 
-
-function consultar(){
+function consultarClient(){
     $.ajax({
-        url:"http://129.151.116.109:8080/api/Client/all",
+        url:"http://localhost:1010/api/Client/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
             console.log(respuesta);
-            pintarRespuesta(respuesta);
+            pintarRespuestaClient(respuesta);
         }
     });
 }
 
-function pintarRespuesta(respuesta){
-    let myTable="<table border='1'>";
-
-    myTable+="<thead>";
-    myTable+="<TR>";
-    myTable+="<th>"+"Nombre"+"</th>";
-    myTable+="<th>"+"Email"+"</th>";
-    myTable+="<th>"+"Edad"+"</th>";
-    myTable+="</TR>";
-    myTable+="</thead>";
+function pintarRespuestaClient(respuesta){
+    let myTable=`<div class="container" style="width: 100%;"><div class="row">`;
     for(i=0; i<respuesta.length; i++) {
-        myTable+="<tr>";
-        myTable+="<td>"+respuesta[i].name+"</td>";
-        myTable+="<td>"+respuesta[i].email+"</td>";
-        myTable+="<td>"+respuesta[i].age+"</td>";
-        myTable+="<td><button onclick='eliminar("+respuesta[i].idClient+")'>Borrar</button></td>";
-        myTable+="<td><button onclick='cargar("+respuesta[i].idClient+")'>Cargar</button></td>";
-        myTable+="</tr>";
+        myTable+=`
+            <div class="card m-2" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">${respuesta[i].name}</h5>
+                    <a href="${respuesta[i].email}" class="card-link">${respuesta[i].email}</a>
+                    <!-- p class="card-text">${respuesta[i].age}</p -->
+                    <div align="centre">
+                        <button class="btn btn-success" onclick="eliminar(${respuesta[i].idClient})">Borrar</button>
+                        <button class="btn btn-success" onclick="cargar(${respuesta[i].idClient})">Cargar</button>
+                    </div>
+                </div>
+            </div>`;   
+         
     }
-    myTable+="</table>";
-    $("#resultados").html(myTable);
+    myTable+=`</div></div>`;
+    
+    $("#resultadosClient").html(myTable);
 }
 
-function guardar(){
+function guardarClient(){
     let var2 = {
-        name:$("#name").val(),
-        email:$("#email").val(),
-        age:$("#age").val(),
-        password:$("#password").val()
+        name:$("#nameClient").val(),
+        email:$("#emailClient").val(),
+        age:$("#ageClient").val(),
+        password:$("#passwordClient").val()
     };
     $.ajax({
         type:'POST',
         contentType:"application/json; charset=utf-8",
         dataType: 'JSON',
         data: JSON.stringify(var2),
-        url:"http://129.151.116.109:8080/api/Client/save",
+        url:"http://localhost:1010/api/Client/save",
         success:function(respose) {
             console.log("Se guardó correctamente");
             //alert("Se guardó correctametne..");
             //window.location.reload();
-            limpiarFormulario();
-            consultar();
+            limpiarFormularioClient();
+            consultarClient();
         },
         error:function(jqXHR, textStatus, errorTrown){
             window.location.reload();
@@ -167,9 +163,12 @@ function guardar(){
     });
 }
 
-function limpiarFormulario(){
-    $("#name").val("");
-    $("#email").val("");
-    $("#age").val("");
-    $("#password").val("");
+function limpiarFormularioClient(){
+    $("#nameClient").val("");
+    $("#emailClient").val("");
+    $("#ageClient").val("");
+    $("#passwordClient").val("");
 }
+$(document).ready(function(){
+    consultarClient();
+});
