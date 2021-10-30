@@ -2,15 +2,24 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Doctor</title>
+        <!--title>Doctor</title-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="js/doctorFunctions.js"></script>
     </head>
         
     <body><center>
-        <h2>Registro de Doctores</h2>
+        <h2 class="text-md-center m-4">Registro de Doctores</h2>
+        <div id="formato" class="container text-center" style="width: 60%">
+            <input class="form-control m-3" type="text" id="nameDoctor" placeholder="Nombre">
+            <input class="form-control m-3" type="text" id="departmentDoctor" placeholder="Departamento">
+            <input class="form-control m-3" type="number" id="yearDoctor" placeholder="Año">
+            <input class="form-control m-3" type="text" id="descriptionDoctor" placeholder="Descripción">
+            <input class="form-control m-3" type="number" id="specialtyDoctor" placeholder="Especialidad">
+            <button type="button" class="btn btn-success" onclick="guardarDoctor()">GUARDAR</button>
+            <button type="button" class="btn btn-success" onclick="editarDoctor()">EDITAR</button>
+        </div>
 
-        <fieldset style="width: 40%">
+        <!--fieldset style="width: 40%">
             <legend>Datos de Doctor</legend>
             <table>
                 <tr>
@@ -40,15 +49,11 @@
                     </td>
                 </tr>
             </table>
-        </fieldset>
+        </fieldset-->
 
-        <h2>Consultas </h2>
         <hr>
+        <h2 class="text-md-center m-4">Consultas </h2>
+        <div id="resultadosDoctor"></div>
         
-        <div id="resultados"></div>
-        <button onclick="consultar()">MOSTRAR TODO</button>
-        <br>
-        <br>
-        <a href="index.html">Volver a indice</a>
     </center></body>
 </html>

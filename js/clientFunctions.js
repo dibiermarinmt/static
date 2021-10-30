@@ -6,10 +6,10 @@ function editarCliente(){
 
     var elemento={
         idClient:idCarga,
-        name:$("#name").val(),
-        email:$("#email").val(),
-        age:$("#age").val(),
-        password:$("#password").val()
+        name:$("#nameCliente").val(),
+        email:$("#emailCliente").val(),
+        age:$("#ageCliente").val(),
+        password:$("#passwordCliente").val()
           
     };
     
@@ -68,7 +68,7 @@ function eliminarCliente(idElemento){
         
         complete : function(xhr, status) {
            //lert('Petición realizada '+xhr.status);
-            //limpiarFormulario();
+            //limpiarFormularioCliente();
             consultarCliente();
         }
     });
@@ -89,10 +89,10 @@ function cargarCliente(idItem){
 
                 var misItems=json.items;
   
-          $("#name").val(json.name);
-          $("#email").val(json.email);
-          $("#age").val(json.age);
-          $("#password").val(json.password);
+          $("#nameCliente").val(json.name);
+          $("#emailCliente").val(json.email);
+          $("#ageCliente").val(json.age);
+          $("#passwordCliente").val(json.password);
           idCarga = idItem;
           console.log("idCarga es " +idCarga);
   
@@ -134,7 +134,7 @@ function pintarRespuestaCliente(respuesta){
          
     }
     myTable+=`</div></div>`;
-    $("#resultados").html(myTable);
+    $("#resultadosCliente").html(myTable);
     
 }
 
@@ -167,10 +167,10 @@ function guardarCliente(){
 }
 
 function limpiarFormularioCliente(){
-    $("#name").val("");
-    $("#email").val("");
-    $("#age").val("");
-    $("#password").val("");
+    $("#nameCliente").val("");
+    $("#emailCliente").val("");
+    $("#ageCliente").val("");
+    $("#passwordCliente").val("");
 }
 
 $(document).ready(function(){

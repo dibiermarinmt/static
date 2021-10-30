@@ -6,9 +6,9 @@ function editarAdmin(){
 
     var elemento={
         "idAdmin":idCarga,
-        "name":$("#name").val(),
-        "email":$("#email").val(),
-        "password":$("#password").val()
+        "name":$("#nameAdmin").val(),
+        "email":$("#emailAdmin").val(),
+        "password":$("#passwordAdmin").val()
     };
     
     var dataToSend=JSON.stringify(elemento);
@@ -82,9 +82,9 @@ function cargarAdmin(idItem){
 
                 var misItems=json.items;
   
-          $("#name").val(json.name);
-          $("#email").val(json.email);
-          $("#password").val(json.password);
+          $("#nameAdmin").val(json.name);
+          $("#emailAdmin").val(json.email);
+          $("#passwordAdmin").val(json.password);
           idCarga = idItem;
           console.log("idCarga es " +idCarga);
           
@@ -127,7 +127,7 @@ function pintarRespuestaAdmin(respuesta){
          
     }
     myTable+=`</div></div>`;
-    $("#resultados").html(myTable);
+    $("#resultadosAdmin").html(myTable);
     
     /**let myTable="<table border='1'>";
 
@@ -153,9 +153,9 @@ function pintarRespuestaAdmin(respuesta){
 
 function guardarAdmin(){
     let var2 = {
-        name:$("#name").val(),
-        email:$("#email").val(),
-        password:$("#password").val()
+        name:$("#nameAdmin").val(),
+        email:$("#emailAdmin").val(),
+        password:$("#passwordAdmin").val()
     };
     $.ajax({
         type:'POST',
@@ -179,9 +179,9 @@ function guardarAdmin(){
 }
 
 function limpiarFormularioAdmin(){
-    $("#name").val("");
-    $("#email").val("");
-    $("#password").val("");
+    $("#nameAdmin").val("");
+    $("#emailAdmin").val("");
+    $("#passwordAdmin").val("");
 }
 
 $(document).ready(function(){

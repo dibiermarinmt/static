@@ -75,7 +75,7 @@ function cargarPagClient() {
     $("#contClient").load("http://localhost:8080/clientInterface.html", function (data) {
     console.log("se esta ejecutando cargarPagClient")
         $(this).html(data);
-        $("#contAdmin").width= 100;
+        $("#contClient").width= 100;
     })
 }
 
@@ -106,7 +106,7 @@ function mostrarPagClient(){
 //Funciones Cargar pagina Doctor
 
 function cargarPagDoctor() {
-    $("#contDoctor").load("http://localhost:8080/DoctorInterface.html", function (data) {
+    $("#contDoctor").load("http://localhost:8080/doctorInterface.html", function (data) {
     console.log("se esta ejecutando cargarPagDoctor")
         $(this).html(data);
         $("#contDoctor").width= 100;

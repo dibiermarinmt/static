@@ -2,17 +2,27 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Mensaje</title>
+        <!-- title>Mensaje</title -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="js/messageFunctions.js"></script>
     </head>
         
 
-    <body onload="consultarDatos()"><center>
+    <body onload="consultarDatosMessage()"><center>
 
-        <h2>Registro de Mensajes</h2>
+        <h2 class="text-md-center m-4">Registro de Mensajes</h2>
+        
+        <div id="formato" class="container text-center" style="width: 60%">
+            <input class="form-control m-3" type="text" id="messageText" placeholder="Mensaje">
+            <div id="comboDoctor" onclick="fillBookDoctor(document)"></div>
+            <div id="comboClient" onclick="fillBookCliente(document)"></div>
+            <button type="button" class="btn btn-success" onclick="guardarMessage()">GUARDAR</button>
+            <button type="button" class="btn btn-success" onclick="editarMessage()">EDITAR</button>
+        </div>
+        
+        
 
-        <fieldset style="width: 40%">
+        <!--fieldset style="width: 40%">
             <legend>Datos de Mensaje</legend>
             <table>
                 <tr>
@@ -34,16 +44,10 @@
                     </td>
                 </tr>
             </table>
-        </fieldset>
-
-        <h2>Consultas </h2>
+        </fieldset-->
+        
         <hr>
-        
-        <div id="resultados"></div>
-        <button onclick="consultar()">MOSTRAR TODO</button>
-        
-        <br>
-        <br>
-        <a href="index.html">Volver a indice</a>
+        <h2 class="text-md-center m-4">Consultas</h2>        
+        <div id="resultadosMessage"></div>
     </center></body>
 </html>
