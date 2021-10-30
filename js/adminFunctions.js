@@ -18,7 +18,7 @@ function editar(){
        
         data: dataToSend,
         
-        url: 'http://129.151.116.109:8080/api/Admin/update',
+        url: 'http://localhost:8080/api/Admin/update',
         
         type: 'PUT',
         contentType:'application/json',
@@ -53,7 +53,7 @@ function eliminar(idElemento){
         data : dataToSend,
         
        
-        url : "http://129.151.116.109:8080/api/Admin/"+idElemento,
+        url : "http://localhost:8080/api/Admin/"+idElemento,
         type: 'DELETE',
         contentType:'application/json',
         success : function(json, textStatus, xhr) {
@@ -73,7 +73,7 @@ function eliminar(idElemento){
 
 function cargar(idItem){
     $.ajax({    
-        url : "http://129.151.116.109:8080/api/Admin/"+idItem,
+        url : "http://localhost:8080/api/Admin/"+idItem,
         type : 'GET',
         dataType : 'JSON',        
 
@@ -99,7 +99,7 @@ function cargar(idItem){
 
 function consultar(){
     $.ajax({
-        url:"http://129.151.116.109:8080/api/Admin/all",
+        url:"http://localhost:8080/api/Admin/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
@@ -110,7 +110,24 @@ function consultar(){
 }
 
 function pintarRespuesta(respuesta){
-    let myTable="<table border='1'>";
+    let myTable=`<div class="container"><div class="row">`;
+    for(i=0; i<respuesta.length; i++) {
+        myTable+=`
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">${respuesta[i].name}</h5>
+                    <a href="${respuesta[i].email}" class="card-link">${respuesta[i].email}</a>
+                    <!-- p class="card-text">${respuesta[i].password}</p -->
+                    <button class="btn btn-danger" onclick="eliminar(${respuesta[i].idAdmin})">Borrar</button>
+                    <button class="btn btn-danger" onclick="cargar(${respuesta[i].idAdmin})">Cargar</button>
+                </div>
+            </div>`;   
+         
+    }
+    myTable+=`</div></div>`;
+    $("#resultados").html(myTable);
+    
+    /**let myTable="<table border='1'>";
 
     myTable+="<thead>";
     myTable+="<TR>";
@@ -129,7 +146,7 @@ function pintarRespuesta(respuesta){
         myTable+="</tr>";
     }
     myTable+="</table>";
-    $("#resultados").html(myTable);
+    $("#resultados").html(myTable);**/
 }
 
 function guardar(){
@@ -143,7 +160,7 @@ function guardar(){
         contentType:"application/json; charset=utf-8",
         dataType: 'JSON',
         data: JSON.stringify(var2),
-        url:"http://129.151.116.109:8080/api/Admin/save",
+        url:"http://localhost:8080/api/Admin/save",
         success:function(respose) {
             console.log("Se guardó correctamente");
             //alert("Se guardó correctametne..");
