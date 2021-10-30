@@ -2,7 +2,7 @@ var idCarga; // Guarda el Id del elemento cuando se da click en el botón cargar
 
 
 
-function editar(){
+function editarCliente(){
 
     var elemento={
         idClient:idCarga,
@@ -22,7 +22,7 @@ function editar(){
        
         data: dataToSend,
         
-        url: 'http://129.151.116.109:8080/api/Client/update',
+        url: 'http://localhost:8080/api/Client/update',
         
         type: 'PUT',
         contentType:'application/json',
@@ -36,14 +36,14 @@ function editar(){
         
         complete : function(xhr, status) {
             //alert('Petición realizada '+xhr.status);
-            limpiarFormulario();
-            consultar();
+            limpiarFormularioCliente();
+            consultarCliente();
             idCarga=null;
         }
     });
 }
 
-function eliminar(idElemento){
+function eliminarCliente(idElemento){
     var elemento={
         "idClient":idElemento
       };
@@ -57,7 +57,7 @@ function eliminar(idElemento){
         data : dataToSend,
         
        
-        url : "http://129.151.116.109:8080/api/Client/"+idElemento,
+        url : "http://localhost:8080/api/Client/"+idElemento,
         type: 'DELETE',
         contentType:'application/json',
         success : function(json, textStatus, xhr) {
@@ -69,7 +69,7 @@ function eliminar(idElemento){
         complete : function(xhr, status) {
            //lert('Petición realizada '+xhr.status);
             //limpiarFormulario();
-            consultar();
+            consultarCliente();
         }
     });
 }
@@ -78,9 +78,9 @@ function eliminar(idElemento){
 
 
 
-function cargar(idItem){
+function cargarCliente(idItem){
     $.ajax({    
-        url : "http://129.151.116.109:8080/api/Client/"+idItem,
+        url : "http://localhost:8080/api/Client/"+idItem,
         type : 'GET',
         dataType : 'JSON',        
 
@@ -104,42 +104,41 @@ function cargar(idItem){
 //////------------------
 
 
-function consultar(){
+function consultarCliente(){
     $.ajax({
-        url:"http://129.151.116.109:8080/api/Client/all",
+        url:"http://localhost:8080/api/Client/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
             console.log(respuesta);
-            pintarRespuesta(respuesta);
+            pintarRespuestaCliente(respuesta);
         }
     });
 }
 
-function pintarRespuesta(respuesta){
-    let myTable="<table border='1'>";
-
-    myTable+="<thead>";
-    myTable+="<TR>";
-    myTable+="<th>"+"Nombre"+"</th>";
-    myTable+="<th>"+"Email"+"</th>";
-    myTable+="<th>"+"Edad"+"</th>";
-    myTable+="</TR>";
-    myTable+="</thead>";
+function pintarRespuestaCliente(respuesta){
+    let myTable=`<div class="container" style="width: 100%"><div class="row">`;
     for(i=0; i<respuesta.length; i++) {
-        myTable+="<tr>";
-        myTable+="<td>"+respuesta[i].name+"</td>";
-        myTable+="<td>"+respuesta[i].email+"</td>";
-        myTable+="<td>"+respuesta[i].age+"</td>";
-        myTable+="<td><button onclick='eliminar("+respuesta[i].idClient+")'>Borrar</button></td>";
-        myTable+="<td><button onclick='cargar("+respuesta[i].idClient+")'>Cargar</button></td>";
-        myTable+="</tr>";
+        myTable+=`
+            <div class="card m-2" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">${respuesta[i].name}</h5>
+                    <a href="mailto:${respuesta[i].email}" class="card-link">${respuesta[i].email}</a>
+                    <p class="card-text">${respuesta[i].age} años</p>
+                    <div align="centre">
+                        <button class="btn btn-success" onclick="eliminarCliente(${respuesta[i].idClient})">Borrar</button>
+                        <button class="btn btn-success" onclick="cargarCliente(${respuesta[i].idClient})">Cargar</button>
+                    </div>
+                </div>
+            </div>`;   
+         
     }
-    myTable+="</table>";
+    myTable+=`</div></div>`;
     $("#resultados").html(myTable);
+    
 }
 
-function guardar(){
+function guardarCliente(){
     let var2 = {
         name:$("#name").val(),
         email:$("#email").val(),
@@ -151,13 +150,13 @@ function guardar(){
         contentType:"application/json; charset=utf-8",
         dataType: 'JSON',
         data: JSON.stringify(var2),
-        url:"http://129.151.116.109:8080/api/Client/save",
+        url:"http://localhost:8080/api/Client/save",
         success:function(respose) {
             console.log("Se guardó correctamente");
             //alert("Se guardó correctametne..");
             //window.location.reload();
-            limpiarFormulario();
-            consultar();
+            //limpiarFormulario();
+            consultarCliente();
         },
         error:function(jqXHR, textStatus, errorTrown){
             window.location.reload();
@@ -167,9 +166,13 @@ function guardar(){
     });
 }
 
-function limpiarFormulario(){
+function limpiarFormularioCliente(){
     $("#name").val("");
     $("#email").val("");
     $("#age").val("");
     $("#password").val("");
 }
+
+$(document).ready(function(){
+    consultarCliente();
+});
