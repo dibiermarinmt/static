@@ -140,10 +140,10 @@ function pintarRespuestaCliente(respuesta){
 
 function guardarCliente(){
     let var2 = {
-        name:$("#name").val(),
-        email:$("#email").val(),
-        age:$("#age").val(),
-        password:$("#password").val()
+        name:$("#nameCliente").val(),
+        email:$("#emailCliente").val(),
+        age:$("#ageCliente").val(),
+        password:$("#passwordCliente").val()
     };
     $.ajax({
         type:'POST',

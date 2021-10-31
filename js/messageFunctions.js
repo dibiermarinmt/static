@@ -120,34 +120,11 @@ function pintarRespuestaMessage(respuesta){
                         <button class="btn btn-success" onclick="cargarMessage(${respuesta[i].idMessage})">Cargar</button>
                     </div>
                 </div>
-            </div>`;   
-         
+            </div>`;
     }
     myTable+=`</div></div>`;
     $("#resultadosMessage").html(myTable);    
-    
-    /**let myTable="<table border='1'>";
-
-    myTable+="<thead>";
-    myTable+="<TR>";
-    myTable+="<th>"+"Doctor"+"</th>";
-    myTable+="<th>"+"Cliente"+"</th>";
-    myTable+="<th>"+"Mensaje"+"</th>";
-
-    myTable+="</TR>";
-    myTable+="</thead>";
-
-    for(i=0; i<respuesta.length; i++) {
-        myTable+="<tr>";
-        myTable+="<td>"+respuesta[i].doctor.name+"</td>";
-        myTable+="<td>"+respuesta[i].client.name+"</td>";
-        myTable+="<td>"+respuesta[i].messageText+"</td>";
-        myTable+="<td><button onclick='eliminar("+respuesta[i].idMessage+")'>Borrar</button></td>";
-        myTable+="<td><button onclick='cargar("+respuesta[i].idMessage+")'>Cargar</button></td>";
-        myTable+="</tr>";
-    }
-    myTable+="</table>";
-    $("#resultados").html(myTable);*/
+   
 }
 
 function guardarMessage(){
@@ -185,13 +162,6 @@ function limpiarFormularioMessage(){
     window.Clientes.selectedIndex = 0;
 }
 
-//funcion llenado combo box
-function consultarDatosMessage(){
-
-    consultarDoctorMessage();
-    consultarClienteMessage();
-
-}
 
 //funcion obtener datos doctor
 

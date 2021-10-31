@@ -10,7 +10,7 @@ function editarDoctor(){
         "department":$("#departmentDoctor").val(),
         "year":$("#yearDoctor").val(),
         "description":$("#descriptionDoctor").val(),
-        "specialty":{"id":$("#specialtyDoctor").val()}
+        "specialty":{"id":window.Especialidades.options[window.Especialidades.selectedIndex].value}
     };
     
     var dataToSend=JSON.stringify(elemento);
@@ -88,7 +88,8 @@ function cargarDoctor(idItem){
           $("#departmentDoctor").val(json.department);
           $("#yearDoctor").val(json.year);
           $("#descriptionDoctor").val(json.description);
-          $("#specialtyDoctor").val(json.specialty.id);
+          //$("#specialtyDoctor").val(json.specialty.id);
+          window.Especialidades.selectedIndex= json.specialty.id;
           idCarga = idItem;
           console.log("idCarga es " +idCarga);
         }
@@ -132,32 +133,6 @@ function pintarRespuestaDoctor(respuesta){
     }
     myTable+=`</div></div>`;
     $("#resultadosDoctor").html(myTable);
-    
-    /**let myTable="<table border=1>";
-
-    myTable+="<thead>";
-    myTable+="<TR>";
-    myTable+="<th>"+"Nombre"+"</th>";
-    myTable+="<th>"+"Departamento"+"</th>";
-    myTable+="<th>"+"Año"+"</th>";
-    myTable+="<th>"+"Descripcion"+"</th>";
-    myTable+="<th>"+"Especialidad"+"</th>";
-    myTable+="</TR>";
-    myTable+="</thead>";
-   
-    for(i=0; i<respuesta.length; i++) {
-        myTable+="<tr>";
-        myTable+="<td>"+respuesta[i].name+"</td>";
-        myTable+="<td>"+respuesta[i].department+"</td>";
-        myTable+="<td>"+respuesta[i].year+"</td>";
-        myTable+="<td>"+respuesta[i].description+"</td>";
-        myTable+="<td>"+respuesta[i].specialty.name+"</td>";
-        myTable+="<td><button onclick='borrar("+respuesta[i].id+")'>Borrar</button></td>";
-        myTable+="<td><button onclick='cargar("+respuesta[i].id+")'>Cargar</button></td>";
-        myTable+="</tr>";
-    }
-    myTable+="</table>";
-    $("#resultados").html(myTable);**/
 }
 
 function guardarDoctor(){
@@ -166,7 +141,7 @@ function guardarDoctor(){
         department:$("#departmentDoctor").val(),
         year:$("#yearDoctor").val(),
         description:$("#descriptionDoctor").val(),
-        specialty:{"id":$("#specialtyDoctor").val()}
+        specialty:{"id":window.Especialidades.options[window.Especialidades.selectedIndex].value}
     };
     $.ajax({
         type:'POST',
@@ -194,9 +169,46 @@ function limpiarFormularioDoctor(){
     $("#departmentDoctor").val("");
     $("#yearDoctor").val("");
     $("#descriptionDoctor").val("");
-    $("#specialtyDoctor").val("");
+    //$("#specialtyDoctor").val("");
+    window.Especialidades.selectedindex = 0;
 }
+
+
+function consultarSpecialtyDoctor(){
+    $.ajax({
+        url:"http://localhost:8080/api/Specialty/all",
+        type:"GET",
+        datatype:"JSON",
+        success:function(respuesta){
+            comboBoxSpecialty(respuesta);
+        }
+    });
+}
+
+//se llena el combo box de Doctor
+
+    function comboBoxSpecialty(respuesta){
+        let myOption='<select  class="form-control m-3" name=Especialidades id="Especialidades">';
+                myOption+="<option value="+0+">"+"Seleccione Especialidad"+"</option>";
+            for(i=0; i<respuesta.length; i++) {
+                myOption+="<option value="+respuesta[i].id+">"+respuesta[i].name+"</option>";
+
+            }
+        myOption+="</select>";
+        $("#comboSpecialty").html(myOption);
+
+    }
+
+//se obtiene el id del cliente seleccionado del combo box
+
+    /**function fillBookDoctor(document){    
+        var first_select = document.getElementById('Especialidades').value;
+        console.log('Especialidad select -> '+first_select);
+        window.doctorMessage=first_select; 
+     }**/
+
 
 $(document).ready(function(){
     consultarDoctor();
+    consultarSpecialtyDoctor();
 });
