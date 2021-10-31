@@ -7,8 +7,8 @@ function editarMessage(){
     var elemento={
         idMessage:idCarga,
         messageText:$("#messageText").val(),
-        doctor:{"id":$("#doctorMessage").val()},
-        client:{"idClient":$("#clientMessage").val()}
+        doctor:{"id":window.Doctores.options[window.Doctores.selectedIndex].value},
+        client:{"idClient":window.Clientes.options[window.Clientes.selectedIndex].value}
     };
     
     var dataToSend=JSON.stringify(elemento);
@@ -81,13 +81,11 @@ function cargarMessage(idItem){
                 console.log(json);
   
           $("#messageText").val(json.messageText);
-          $("#doctorMessage").val(json.doctor.id);
-          $("#clientMessage").val(json.client.idClient);
+          window.Doctores.selectedIndex= json.doctor.id;
+          window.Clientes.selectedIndex = json.client.idClient;
           idCarga = idItem;
           console.log("idCarga es " +idCarga);
-          
-  
-  
+          console.log(json.client.idClient);
         }
     });
 }
@@ -181,8 +179,10 @@ function guardarMessage(){
 
 function limpiarFormularioMessage(){
     $("#messageText").val("");
-    $("#doctorMessage").val("");
-    $("#clientMessage").val("");
+    //$("#doctorMessage").val("");
+    window.Doctores.selectedIndex = 0;   
+    //$("#clientMessage").val("");
+    window.Clientes.selectedIndex = 0;
 }
 
 //funcion llenado combo box
@@ -209,7 +209,7 @@ function consultarDoctorMessage(){
 //se llena el combo box de Doctor
 
     function comboBoxDoctor(respuesta){
-        let myOption="<select name= Doctores id=Doctores>";
+        let myOption='<select  class="form-control m-3" name= Doctores id="Doctores">';
                 myOption+="<option value="+0+">"+"Seleccione Doctor"+"</option>";
             for(i=0; i<respuesta.length; i++) {
                 myOption+="<option value="+respuesta[i].id+">"+respuesta[i].name+"</option>";
@@ -224,9 +224,8 @@ function consultarDoctorMessage(){
 
     function fillBookDoctor(document){    
         var first_select = document.getElementById('Doctores').value;
-        
         console.log('Doctor select -> '+first_select);
-        window.doctor=first_select; 
+        window.doctorMessage=first_select; 
      }
 
 
@@ -235,7 +234,7 @@ function consultarDoctorMessage(){
 
 function consultarClienteMessage(){
     $.ajax({
-        url:"localhost:8080/api/Client/all",
+        url:"http://localhost:8080/api/Client/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
@@ -246,8 +245,8 @@ function consultarClienteMessage(){
 }
 //llenar combo box clientes
     function comboBoxCliente(respuesta){
-        let myOption="<select name=Clientes id=Clientes>";
-                myOption+="<option value="+0+">"+"Seleccione Cliente"+"</option>"
+        let myOption='<select class="form-control m-3" name=Clientes id="Clientes">';
+            myOption+="<option value="+0+">"+"Seleccione Cliente"+"</option>"
             for(i=0; i<respuesta.length; i++) {
                 myOption+="<option value="+respuesta[i].idClient+">"+respuesta[i].name+"</option>"
 
@@ -261,9 +260,11 @@ function consultarClienteMessage(){
         var first_select = document.getElementById('Clientes').value;
         
         console.log('Client select -> '+first_select);
-        window.client=first_select; 
+        window.clientMessage=first_select; 
      }
 
 $(document).ready(function(){
     consultarMessage();
+    consultarDoctorMessage();
+    consultarClienteMessage();
 });
