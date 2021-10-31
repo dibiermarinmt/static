@@ -1,7 +1,6 @@
 var idCarga; // Guarda el Id del elemento cuando se da click en el botón cargar
 
 
-
 function editarDoctor(){
 
     var elemento={
@@ -17,15 +16,11 @@ function editarDoctor(){
     $.ajax({    
 
         dataType : 'JSON',
-       
         data: dataToSend,
-        
-        url: 'http://localhost:8080/api/Doctor/update',
-        
+        url: 'http://localhost:1010/api/Doctor/update',
         type: 'PUT',
         contentType:'application/json',
-        
-        
+      
         success : function(json, textStatus, xhr) {
          
                 console.log(json);
@@ -35,7 +30,7 @@ function editarDoctor(){
         complete : function(xhr, status) {
             //alert('Petición realizada '+xhr.status);
             limpiarFormularioDoctor();
-            consultarDoctor();
+            consultarDoctorI();
             idCarga=null;
         }
     });
@@ -54,8 +49,7 @@ function eliminarDoctor(idElemento){
        
         data : dataToSend,
         
-       
-        url : "http://localhost:8080/api/Doctor/"+idElemento,
+        url : "http://localhost:1010/api/Doctor/"+idElemento,
         type: 'DELETE',
         contentType:'application/json',
         success : function(json, textStatus, xhr) {
@@ -67,17 +61,14 @@ function eliminarDoctor(idElemento){
         complete : function(xhr, status) {
            //lert('Petición realizada '+xhr.status);
             //limpiarFormulario();
-            consultarDoctor();
+            consultarDoctorI();
         }
     });
 }
 
-
-
-
 function cargarDoctor(idItem){
     $.ajax({    
-        url : "http://localhost:8080/api/Doctor/"+idItem,
+        url : "http://localhost:1010/api/Doctor/"+idItem,
         type : 'GET',
         dataType : 'JSON',        
 
@@ -98,10 +89,9 @@ function cargarDoctor(idItem){
 
 //////------------------
 
-
-function consultarDoctor(){
+function consultarDoctorI(){
     $.ajax({
-        url:"http://localhost:8080/api/Doctor/all",
+        url:"http://localhost:1010/api/Doctor/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
@@ -112,20 +102,22 @@ function consultarDoctor(){
 }
 
 function pintarRespuestaDoctor(respuesta){
-    
-    let myTable=`<div class="container" style="width: 100%"><div class="row">`;
+
+
+    let myTable=`<div class="container" style="width: 100%;"><div class="row">`;
     for(i=0; i<respuesta.length; i++) {
         myTable+=`
             <div class="card m-2" style="width: 20rem;">
                 <div class="card-body">
-                    <h5 class="card-title">${respuesta[i].name}</h5>
+                    <h5 class="card-title"><b>${respuesta[i].name}</b></h5>
                     <p class="card-text">${respuesta[i].department}</p>
-                    <p class="card-text">Año ${respuesta[i].year}</p>
+                    <p class="card-text">${respuesta[i].year}</p>
                     <p class="card-text">${respuesta[i].description}</p>
                     <p class="card-text">${respuesta[i].specialty.name}</p>
+                    
                     <div align="centre">
-                        <button class="btn btn-success" onclick="eliminarDoctor(${respuesta[i].id})">Borrar</button>
-                        <button class="btn btn-success" onclick="cargarDoctor(${respuesta[i].id})">Cargar</button>
+                        <button class="btn btn-success" onclick="eliminar(${respuesta[i].idClient})">Borrar</button>
+                        <button class="btn btn-success" onclick="cargar(${respuesta[i].idClient})">Cargar</button>
                     </div>
                 </div>
             </div>`;   
@@ -148,13 +140,13 @@ function guardarDoctor(){
         contentType:"application/json; charset=utf-8",
         dataType: 'JSON',
         data: JSON.stringify(var2),
-        url:"http://localhost:8080/api/Doctor/save",
+        url:"http://localhost:1010/api/Doctor/save",
         success:function(respose) {
             console.log("Se guardó correctamente");
             //alert("Se guardó correctametne..");
             //window.location.reload();
-            //limpiarFormulario();
-            consultarDoctor();
+            limpiarFormularioDoctor();
+            consultarDoctorI();
         },
         error:function(jqXHR, textStatus, errorTrown){
             window.location.reload();

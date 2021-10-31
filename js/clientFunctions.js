@@ -1,16 +1,14 @@
 var idCarga; // Guarda el Id del elemento cuando se da click en el botón cargar
 
 
-
-function editarCliente(){
+function editarClient(){
 
     var elemento={
         idClient:idCarga,
-        name:$("#nameCliente").val(),
-        email:$("#emailCliente").val(),
-        age:$("#ageCliente").val(),
-        password:$("#passwordCliente").val()
-          
+        name:$("#nameClient").val(),
+        email:$("#emailClient").val(),
+        age:$("#ageClient").val(),
+        password:$("#passwordClient").val()
     };
     
     var dataToSend=JSON.stringify(elemento);
@@ -22,7 +20,7 @@ function editarCliente(){
        
         data: dataToSend,
         
-        url: 'http://localhost:8080/api/Client/update',
+        url: 'http://localhost:1010/api/Client/update',
         
         type: 'PUT',
         contentType:'application/json',
@@ -36,14 +34,14 @@ function editarCliente(){
         
         complete : function(xhr, status) {
             //alert('Petición realizada '+xhr.status);
-            limpiarFormularioCliente();
-            consultarCliente();
+            limpiarFormularioClient();
+            consultarClient();
             idCarga=null;
         }
     });
 }
 
-function eliminarCliente(idElemento){
+function eliminarClient(idElemento){
     var elemento={
         "idClient":idElemento
       };
@@ -57,7 +55,7 @@ function eliminarCliente(idElemento){
         data : dataToSend,
         
        
-        url : "http://localhost:8080/api/Client/"+idElemento,
+        url : "http://localhost:1010/api/Client/"+idElemento,
         type: 'DELETE',
         contentType:'application/json',
         success : function(json, textStatus, xhr) {
@@ -68,8 +66,8 @@ function eliminarCliente(idElemento){
         
         complete : function(xhr, status) {
            //lert('Petición realizada '+xhr.status);
-            //limpiarFormularioCliente();
-            consultarCliente();
+            //limpiarFormulario();
+            consultarClient();
         }
     });
 }
@@ -77,10 +75,9 @@ function eliminarCliente(idElemento){
 
 
 
-
-function cargarCliente(idItem){
+function cargarClient(idItem){
     $.ajax({    
-        url : "http://localhost:8080/api/Client/"+idItem,
+        url : "http://localhost:1010/api/Client/"+idItem,
         type : 'GET',
         dataType : 'JSON',        
 
@@ -89,10 +86,10 @@ function cargarCliente(idItem){
 
                 var misItems=json.items;
   
-          $("#nameCliente").val(json.name);
-          $("#emailCliente").val(json.email);
-          $("#ageCliente").val(json.age);
-          $("#passwordCliente").val(json.password);
+          $("#nameClient").val(json.name);
+          $("#emailClient").val(json.email);
+          $("#ageClient").val(json.age);
+          $("#passwordClient").val(json.password);
           idCarga = idItem;
           console.log("idCarga es " +idCarga);
   
@@ -103,42 +100,41 @@ function cargarCliente(idItem){
 
 //////------------------
 
-
-function consultarCliente(){
+function consultarClient(){
     $.ajax({
-        url:"http://localhost:8080/api/Client/all",
+        url:"http://localhost:1010/api/Client/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
             console.log(respuesta);
-            pintarRespuestaCliente(respuesta);
+            pintarRespuestaClient(respuesta);
         }
     });
 }
 
-function pintarRespuestaCliente(respuesta){
-    let myTable=`<div class="container" style="width: 100%"><div class="row">`;
+function pintarRespuestaClient(respuesta){
+    let myTable=`<div class="container" style="width: 100%;"><div class="row">`;
     for(i=0; i<respuesta.length; i++) {
         myTable+=`
             <div class="card m-2" style="width: 20rem;">
                 <div class="card-body">
                     <h5 class="card-title">${respuesta[i].name}</h5>
-                    <a href="mailto:${respuesta[i].email}" class="card-link">${respuesta[i].email}</a>
-                    <p class="card-text">${respuesta[i].age} años</p>
+                    <a href="${respuesta[i].email}" class="card-link">${respuesta[i].email}</a>
+                    <!-- p class="card-text">${respuesta[i].age}</p -->
                     <div align="centre">
-                        <button class="btn btn-success" onclick="eliminarCliente(${respuesta[i].idClient})">Borrar</button>
-                        <button class="btn btn-success" onclick="cargarCliente(${respuesta[i].idClient})">Cargar</button>
+                        <button class="btn btn-success" onclick="eliminar(${respuesta[i].idClient})">Borrar</button>
+                        <button class="btn btn-success" onclick="cargar(${respuesta[i].idClient})">Cargar</button>
                     </div>
                 </div>
             </div>`;   
          
     }
     myTable+=`</div></div>`;
-    $("#resultadosCliente").html(myTable);
     
+    $("#resultadosClient").html(myTable);
 }
 
-function guardarCliente(){
+function guardarClient(){
     let var2 = {
         name:$("#nameCliente").val(),
         email:$("#emailCliente").val(),
@@ -150,13 +146,13 @@ function guardarCliente(){
         contentType:"application/json; charset=utf-8",
         dataType: 'JSON',
         data: JSON.stringify(var2),
-        url:"http://localhost:8080/api/Client/save",
+        url:"http://localhost:1010/api/Client/save",
         success:function(respose) {
             console.log("Se guardó correctamente");
             //alert("Se guardó correctametne..");
             //window.location.reload();
-            //limpiarFormulario();
-            consultarCliente();
+            limpiarFormularioClient();
+            consultarClient();
         },
         error:function(jqXHR, textStatus, errorTrown){
             window.location.reload();
@@ -165,14 +161,12 @@ function guardarCliente(){
         }
     });
 }
-
-function limpiarFormularioCliente(){
-    $("#nameCliente").val("");
-    $("#emailCliente").val("");
-    $("#ageCliente").val("");
-    $("#passwordCliente").val("");
+function limpiarFormularioClient(){
+    $("#nameClient").val("");
+    $("#emailClient").val("");
+    $("#ageClient").val("");
+    $("#passwordClient").val("");
 }
-
 $(document).ready(function(){
-    consultarCliente();
+    consultarClient();
 });
