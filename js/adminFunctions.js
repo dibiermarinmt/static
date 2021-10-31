@@ -1,7 +1,6 @@
 var idCarga; // Guarda el Id del elemento cuando se da click en el botón cargar
 
 
-
 function editarAdmin(){
 
     var elemento={
@@ -18,7 +17,7 @@ function editarAdmin(){
        
         data: dataToSend,
         
-        url: 'http://localhost:8080/api/Admin/update',
+        url: 'http://localhost:1010/api/Admin/update',
         
         type: 'PUT',
         contentType:'application/json',
@@ -32,7 +31,7 @@ function editarAdmin(){
         
         complete : function(xhr, status) {
             //alert('Petición realizada '+xhr.status);
-            //limpiarFormularioAdmin();
+            limpiarFormulario();
             consultarAdmin();
             idCarga=null;
         }
@@ -53,7 +52,7 @@ function eliminarAdmin(idElemento){
         data : dataToSend,
         
        
-        url : "http://localhost:8080/api/Admin/"+idElemento,
+        url : "http://localhost:1010/api/Admin/"+idElemento,
         type: 'DELETE',
         contentType:'application/json',
         success : function(json, textStatus, xhr) {
@@ -70,10 +69,9 @@ function eliminarAdmin(idElemento){
     });
 }
 
-
 function cargarAdmin(idItem){
     $.ajax({    
-        url : "http://localhost:8080/api/Admin/"+idItem,
+        url : "http://localhost:1010/api/Admin/"+idItem,
         type : 'GET',
         dataType : 'JSON',        
 
@@ -96,10 +94,9 @@ function cargarAdmin(idItem){
 
 //////------------------
 
-
 function consultarAdmin(){
     $.ajax({
-        url:"http://localhost:8080/api/Admin/all",
+        url:"http://localhost:1010/api/Admin/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
@@ -110,7 +107,7 @@ function consultarAdmin(){
 }
 
 function pintarRespuestaAdmin(respuesta){
-    let myTable=`<div class="container" style="width: 100%"><div class="row">`;
+    let myTable=`<div class="container" style="width: 100%;"><div class="row" >`;
     for(i=0; i<respuesta.length; i++) {
         myTable+=`
             <div class="card m-2" style="width: 20rem;">
@@ -126,7 +123,7 @@ function pintarRespuestaAdmin(respuesta){
             </div>`;   
          
     }
-    myTable+=`</div></div>`;
+    myTable+=`</div></div></div>`;
     $("#resultadosAdmin").html(myTable);
     
     /**let myTable="<table border='1'>";
@@ -162,12 +159,12 @@ function guardarAdmin(){
         contentType:"application/json; charset=utf-8",
         dataType: 'JSON',
         data: JSON.stringify(var2),
-        url:"http://localhost:8080/api/Admin/save",
+        url:"http://localhost:1010/api/Admin/save",
         success:function(respose) {
             console.log("Se guardó correctamente");
             //alert("Se guardó correctametne..");
             //window.location.reload();
-            //limpiarFormularioAdmin();
+            limpiarFormulario();
             consultarAdmin();
         },
         error:function(jqXHR, textStatus, errorTrown){
@@ -178,7 +175,7 @@ function guardarAdmin(){
     });
 }
 
-function limpiarFormularioAdmin(){
+function limpiarFormulario(){
     $("#nameAdmin").val("");
     $("#emailAdmin").val("");
     $("#passwordAdmin").val("");

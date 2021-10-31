@@ -8,7 +8,26 @@
         
     </head>
         
-    <body onload="consultarDatos()"><center>
+    <body onload="consultarDatosR()"><center>
+
+        <h2 class="text-md-center m-4">Registro de Reservaciones</h2>
+        <div id="formato" class="container text-center" style="width: 80%;">
+            
+            <p class="text-md-center m-3">Fecha de Inicio</p>
+            <input class="form-control m-3" type="date" id="dateStart" placeholder="Nombre">
+            <p class="text-md-center m-3">Fecha de Devolucion</p>
+            <input class="form-control m-3" type="date" id="dateDevolution" placeholder="Departamento">
+            <input class="form-control m-3" type="text" id="yearDoctor" placeholder="Año">
+            <input class="form-control m-3" type="text" id="descriptionDoctor" placeholder="Descripcion">
+            <div id="comboDoctorR" onclick="fillBookDoctorR(document)"></div>
+            <div id="comboClientR" onclick="fillBookClientR(document)"></div>
+            <br>
+            <button type="button" class="btn btn-success" onclick="guardarReservation()">GUARDAR</button>
+            <button type="button" class="btn btn-success" onclick="editarReservation()">EDITAR</button>
+        </div>
+
+
+
         <h2>Registro de Reservaciones</h2>
 
         <fieldset style="width: 80%">
@@ -16,7 +35,7 @@
             <table>
                 <tr>
                     <th>Start Date:</th>
-                    <td><input type="number" id="year"></td>
+                    <td><input type="date" id="year"></td>
                     <td>A&ntildeo</td>
                     <td><input type="number" id="month"></td>
                     <td>Mes</td>
@@ -46,8 +65,8 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <input type="button" value="GUARDAR" onclick="guardar()"> &nbsp;&nbsp;&nbsp;
-                        <input type="button" value="EDITAR" onclick="editar()"> &nbsp;&nbsp;&nbsp;
+                        <input type="button" value="GUARDAR" onclick="guardarReservation()"> &nbsp;&nbsp;&nbsp;
+                        <input type="button" value="EDITAR" onclick="editarReservation()"> &nbsp;&nbsp;&nbsp;
                     </td>
                 </tr>
             </table>
@@ -57,7 +76,7 @@
         <hr>
         
         <div id="resultados"></div>
-        <button onclick="consultar()">MOSTRAR TODO</button>
+        <button onclick="consultarReservation()">MOSTRAR TODO</button>
         
         <br>
         <br>
@@ -70,11 +89,11 @@
             <table>
                 <tr>
                     <th>Score</th>
-                    <td><input type="number" id="score" readonly="readonly"></td>
+                    <td><input type="number" id="scoreReservation" readonly="readonly"></td>
                 </tr>
                 <tr>    
                     <td>Mensaje</td>
-                    <td><input type="text" id="message" readonly="readonly"></td>
+                    <td><input type="text" id="messageReservation" readonly="readonly"></td>
                 </tr>
                 
                     <td colspan="2">

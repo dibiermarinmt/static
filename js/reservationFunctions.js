@@ -1,8 +1,7 @@
 var idCarga; // Guarda el Id del elemento cuando se da click en el botón cargar
 var idCargaScore;
 
-
-function editar(){
+function editarReservation(){
 
     var elemento={
         idReservation: idCarga,
@@ -20,7 +19,7 @@ function editar(){
        
         data: dataToSend,
         
-        url: 'http://129.151.116.109:8080/api/Reservation/update',
+        url: 'http://localhost:1010/api/Reservation/update',
         
         type: 'PUT',
         contentType:'application/json',
@@ -34,8 +33,8 @@ function editar(){
         
         complete : function(xhr, status) {
             //alert('Petición realizada '+xhr.status);
-            limpiarFormulario();
-            consultar();
+            limpiarFormularioReservation();
+            consultarReservation();
             
         }
     });
@@ -47,8 +46,8 @@ function editarScore(){
 
     var elemento={
         idScore: idCargaScore,
-        score:$("#score").val(),
-            message:$("#message").val(),
+        score:$("#scoreReservation").val(),
+            message:$("#messageReservation").val(),
             reservation:{"idReservation":idCarga}
     };
    
@@ -60,7 +59,7 @@ function editarScore(){
        
         data: dataToSend,
         
-        url: 'http://129.151.116.109:8080/api/Score/update',
+        url: 'http://localhost:1010/api/Score/update',
         
         type: 'PUT',
         contentType:'application/json',
@@ -74,30 +73,29 @@ function editarScore(){
         
         complete : function(xhr, status) {
             //alert('Petición realizada '+xhr.status);
-            limpiarFormulario();
-            consultar();
+            limpiarFormularioReservation();
+            consultarReservation();
             idCarga=null;
         }
     });
 }
 
 
-
 function conseguirScore(idElemento){
     
       
       $.ajax({    
-        url : "http://129.151.116.109:8080/api/Reservation/"+idElemento,
+        url : "http://localhost:1010/api/Reservation/"+idElemento,
         type : 'GET',
         dataType : 'JSON',        
 
         success : function(json) {               
-                console.log(json.score.idScore+"poronga");
+                console.log(json.score.idScore);
                 window.idScoreE = json.score.idScore;
                 eliminarScore(window.idScoreE);
             }
     });}
-    function eliminar(idElemento){
+    function eliminarReservation(idElemento){
         //conseguirScore(window.idScoreE);
 
         var elemento={
@@ -115,7 +113,7 @@ function conseguirScore(idElemento){
         data : dataToSend,
         
         
-        url : "http://129.151.116.109:8080/api/Reservation/"+idElemento,
+        url : "http://localhost:1010/api/Reservation/"+idElemento,
         type: 'DELETE',
         contentType:'application/json',
         success : function(json, textStatus, xhr) {
@@ -127,7 +125,7 @@ function conseguirScore(idElemento){
         complete : function(xhr, status) {
            //lert('Petición realizada '+xhr.status);
             //limpiarFormulario();
-            consultar();
+            consultarReservation();
         }
     });
 }
@@ -147,7 +145,7 @@ function eliminarScore(){
        
         data : dataToSend,
         
-        url : "http://129.151.116.109:8080/api/Score/"+window.idScoreE,
+        url : "http://localhost:1010/api/Score/"+window.idScoreE,
         type: 'DELETE',
         contentType:'application/json',
         success : function(json, textStatus, xhr) {
@@ -159,15 +157,14 @@ function eliminarScore(){
         complete : function(xhr, status) {
            //lert('Petición realizada '+xhr.status);
             //limpiarFormulario();
-            consultar();
+            consultarReservation();
         }
     });
 }
 
-
-function cargar(idItem){
+function cargarReservation(idItem){
     $.ajax({    
-        url : "http://129.151.116.109:8080/api/Reservation/"+idItem,
+        url : "http://localhost:1010/api/Reservation/"+idItem,
         type : 'GET',
         dataType : 'JSON',        
 
@@ -214,20 +211,20 @@ function cargar(idItem){
 
 function cargarScore(idItem){
     $.ajax({    
-        url : "http://129.151.116.109:8080/api/Reservation/"+idItem,
+        url : "http://localhost:1010/api/Reservation/"+idItem,
         type : 'GET',
         dataType : 'JSON',        
 
         success : function(json) {               
                 console.log(json);
   
-          $("#score").val(json.score.score);
-          $("#message").val(json.score.message);
+          $("#scoreReservation").val(json.score.score);
+          $("#messageReservation").val(json.score.message);
           idCarga = idItem;
           idCargaScore = json.score.idScore;
           console.log("idCarga es " +idCargaScore);
-          var scoreInput = document.getElementById('score');
-          var messageInput = document.getElementById('message');
+          var scoreInput = document.getElementById('scoreReservation');
+          var messageInput = document.getElementById('messageReservation');
             scoreInput.readOnly=false;
             messageInput.readOnly=false;
   
@@ -237,21 +234,20 @@ function cargarScore(idItem){
 
 //////------------------
 
-
-function consultar(){
+function consultarReservation(){
     $.ajax({
-        url:"http://129.151.116.109:8080/api/Reservation/all",
+        url:"http://localhost:1010/api/Reservation/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
             console.log(respuesta);
             window.respuesta=respuesta;
-            pintarRespuesta(respuesta);
+            pintarRespuestaReservation(respuesta);
         }
     });
 }
 
-function pintarRespuesta(respuesta){
+function pintarRespuestaReservation(respuesta){
 
     let myTable="<table border=1>";
 
@@ -305,7 +301,7 @@ function pintarRespuesta(respuesta){
     $("#resultados").html(myTable);
 }
 
-function guardar(){
+function guardarReservation(){
     let var2 = {
         startDate:$("#year").val()+"-"+$("#month").val()+"-"+$("#day").val(),
         devolutionDate:$("#yearD").val()+"-"+$("#monthD").val()+"-"+$("#dayD").val(),
@@ -319,13 +315,13 @@ function guardar(){
         contentType:"application/json; charset=utf-8",
         dataType: 'JSON',
         data: JSON.stringify(var2),
-        url:"http://129.151.116.109:8080/api/Reservation/save",
+        url:"http://localhost:1010/api/Reservation/save",
         success:function(respose) {
             console.log("Se guardó correctamente");
             //alert("Se guardó correctametne..");
             //window.location.reload();
-            limpiarFormulario();
-            consultar();
+            limpiarFormularioReservation();
+            consultarReservation();
         },
         error:function(jqXHR, textStatus, errorTrown){
             
@@ -335,7 +331,7 @@ function guardar(){
     });
 }
 
-function limpiarFormulario(){
+function limpiarFormularioReservation(){
     $("#year").val("");
     $("#month").val("");
     $("#day").val("");
@@ -349,27 +345,27 @@ function limpiarFormulario(){
     $("#score").val("");
 }
 
-function consultarDatos(){
+function consultarDatosReservation(){
 
-    consultarDoctor();
-    consultarCliente();
+    consultarDoctorR();
+    consultarClienteR();
 
 }
 
 // funciones combo box Doctor 1(consulta) 2(llenado Option) 3(declaracion variable global Doctor)
 
- function consultarDoctor(){
+ function consultarDoctorR(){
     $.ajax({
-        url:"http://129.151.116.109:8080/api/Doctor/all",
+        url:"http://localhost:1010/api/Doctor/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
-            comboBoxDoctor(respuesta);
+            comboBoxDoctorR(respuesta);
         }
     });
 }
-    function comboBoxDoctor(respuesta){
-        let myOption="<select name= Doctores id=Doctores>";
+    function comboBoxDoctorR(respuesta){
+        let myOption="<select name= Doctores id=DoctoresReservation>";
                 myOption+="<option value="+0+">"+"Seleccione Doctor"+"</option>";
             for(i=0; i<respuesta.length; i++) {
                 myOption+="<option value="+respuesta[i].id+">"+respuesta[i].name+"</option>";
@@ -380,8 +376,8 @@ function consultarDatos(){
         
     }
 
-    function fillBook(document){    
-        var first_select = document.getElementById('Doctores').value;
+    function fillBookDoctorR(document){    
+        var first_select = document.getElementById('DoctoresReservation').value;
         
         console.log('Doctor select -> '+first_select);
         window.doctor=first_select; 
@@ -389,19 +385,19 @@ function consultarDatos(){
 
 //// funciones combo box Client 1(consulta) 2(llenado Option) 3(declaracion variable global Doctor id)
 
-function consultarCliente(){
+function consultarClienteR(){
     $.ajax({
-        url:"http://129.151.116.109:8080/api/Client/all",
+        url:"http://localhost:1010/api/Client/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
-            comboBoxCliente(respuesta);
+            comboBoxClienteR(respuesta);
 
         }
     });
 }
-    function comboBoxCliente(respuesta){
-        let myOption="<select name=Clientes id=Clientes>";
+    function comboBoxClienteR(respuesta){
+        let myOption="<select name=Clientes id=ClientesReservation>";
                 myOption+="<option value="+0+">"+"Seleccione Cliente"+"</option>";
             for(i=0; i<respuesta.length; i++) {
                 myOption+="<option value="+respuesta[i].idClient+">"+respuesta[i].name+"</option>";
@@ -412,8 +408,8 @@ function consultarCliente(){
         
     }
 
-    function fillBookCliente(document){    
-        var first_select = document.getElementById('Clientes').value;
+    function fillBookClienteR(document){    
+        var first_select = document.getElementById('ClientesReservation').value;
         
         console.log('Client select -> '+first_select);
         window.client=first_select; 
@@ -423,7 +419,7 @@ function consultarCliente(){
 
      function Calificar(idItem){
         $.ajax({    
-            url : "http://129.151.116.109:8080/api/Reservation/"+idItem,
+            url : "http://localhost:1010/api/Reservation/"+idItem,
             type : 'GET',
             dataType : 'JSON',        
     
@@ -434,8 +430,8 @@ function consultarCliente(){
               console.log("idCarga es " +idCarga);
              
               window.reservation=idCarga;
-              var scoreInput = document.getElementById('score');
-              var messageInput = document.getElementById('message');
+              var scoreInput = document.getElementById('scoreReservation');
+              var messageInput = document.getElementById('messageReservation');
 
                 scoreInput.readOnly=false;
                 messageInput.readOnly=false;
@@ -451,8 +447,8 @@ function consultarCliente(){
     function calificacion(){
 
         let var2 = {
-            score:$("#score").val(),
-            message:$("#message").val(),
+            score:$("#scoreReservation").val(),
+            message:$("#messageReservation").val(),
             reservation:{"idReservation":window.reservation}        
         };
         console.log(var2);
@@ -461,7 +457,7 @@ function consultarCliente(){
             contentType:"application/json; charset=utf-8",
             dataType: 'JSON',
             data: JSON.stringify(var2),
-            url:"http://129.151.116.109:8080/api/Score/save",
+            url:"http://localhost:1010/api/Score/save",
             success:function(respose) {
                 console.log("Se guardó correctamente");
                 var scoreInput = document.getElementById('score');
@@ -470,7 +466,7 @@ function consultarCliente(){
                 messageInput.readOnly=true;
                 $("#score").val(""),
                 $("#message").val(""),           
-                consultar();
+                consultarReservation();
             },
             error:function(jqXHR, textStatus, errorTrown){
                 
